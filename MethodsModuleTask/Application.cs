@@ -1,12 +1,8 @@
 ﻿using MethodsModuleTask.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace MethodsModuleTask
 {
@@ -26,10 +22,22 @@ namespace MethodsModuleTask
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("ru-RU");
             }
             Subscribe();
-            var path = "D:\\test";
-            var folders = _fileSystemVisitor.GetAllFolders(path);
-            var files = _fileSystemVisitor.GetAllFiles(path);
-            var newFolders = _fileSystemVisitor.GetAllFolders(path, x => x.Contains("new"));
+            var path = ConfigurationManager.AppSettings["path"];
+            try
+            {
+                var folders = _fileSystemVisitor.GetAllFolders(path);
+                var files = _fileSystemVisitor.GetAllFiles(path);
+                var newFolders = _fileSystemVisitor.GetAllFolders(path, x => x.Contains("new"));
+            }
+            catch(FileSystemVisitorException e)
+            {
+                Console.WriteLine(e.Message);
+                Console.WriteLine("Check your config file");
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine("Unexpected exception " + e.Message);
+            }
         }
 
         protected virtual bool Subscribe()

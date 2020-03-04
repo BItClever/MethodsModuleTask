@@ -15,6 +15,10 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFiles(string path)
         {
+            if(!CheckPathExists(path))
+            {
+                throw new FileSystemVisitorException(string.Format("Path \"{0}\" does not exist", path));
+            }
             OnWorkStart();
             var di = new DirectoryInfo(path);
             var result = di.GetFiles("*.*", SearchOption.AllDirectories).Select(x => x.FullName);
@@ -24,7 +28,6 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFiles(string path, Func<string, bool> filter = null)
         {
-            //return GetAllFiles(path).Where(filter ?? (f => true));
             foreach(var file in GetAllFiles(path))
             {
                 if(filter(file))
@@ -36,6 +39,10 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFolders(string path)
         {
+            if (!CheckPathExists(path))
+            {
+                throw new FileSystemVisitorException(string.Format("Path \"{0}\" does not exist", path));
+            }
             OnWorkStart();
             var di = new DirectoryInfo(path);
             var result = di.GetDirectories("*.*", SearchOption.AllDirectories).AsEnumerable().Select(f => f.FullName);
@@ -45,7 +52,6 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFolders(string path, Func<string, bool> filter = null)
         {
-            //return GetAllFolders(path).Where(filter ?? (f => true));
             foreach (var folder in GetAllFolders(path))
             {
                 if (filter(folder))
@@ -63,6 +69,11 @@ namespace MethodsModuleTask
         private void OnWorkFinish()
         {
             WorkFinish?.Invoke(this, new VisitorEventArgs(messages.Finish));
+        }
+
+        private bool CheckPathExists(string path)
+        {
+            return Directory.Exists(path);
         }
 
     }

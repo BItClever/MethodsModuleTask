@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="FileSystemVisitor.cs" />
+    <Compile Include="FileSystemVisitorException.cs" />
     <Compile Include="Interfaces\IFileSystemVisitor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

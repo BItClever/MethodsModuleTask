@@ -1,10 +1,7 @@
 ﻿using MethodsModuleTask.Interfaces;
 using NUnit.Framework;
-using System;
 using Moq;
 using Moq.Protected;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MethodsModuleTask.Test
 {
