@@ -21,8 +21,6 @@ namespace MethodsModuleTask.Test
         [Test]
         public void GetAllFilesTest()
         {
-            //Arrange:
-
             //Act:
             var result = fileSystemVisitor.GetAllFiles(Path);
 
@@ -50,8 +48,6 @@ namespace MethodsModuleTask.Test
         [Test]
         public void GetAllFoldersTest()
         {
-            //Arrange:
-
             //Act:
             var result = fileSystemVisitor.GetAllFolders(Path);
 
