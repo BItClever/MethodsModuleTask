@@ -61,6 +61,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check your config file.
+        /// </summary>
+        public static string CheckConfig {
+            get {
+                return ResourceManager.GetString("CheckConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Path does not exist:.
+        /// </summary>
+        public static string ExceptionMessage {
+            get {
+                return ResourceManager.GetString("ExceptionMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finish working.
         /// </summary>
         public static string Finish {

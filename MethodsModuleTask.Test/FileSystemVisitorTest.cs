@@ -10,6 +10,7 @@ namespace MethodsModuleTask.Test
     {
         private IFileSystemVisitor fileSystemVisitor;
         private const string Path = "D:\\test";
+        private const string WrongPath = "qwerty";
 
         [SetUp]
         public void Setup()
@@ -28,6 +29,12 @@ namespace MethodsModuleTask.Test
             Assert.Pass();
             Assert.IsInstanceOf<IEnumerable<string>>(result);
             Assert.NotNull(result);
+        }
+
+        [Test]
+        public void GetAllFilesException()
+        {
+            Assert.Throws<FileSystemVisitorException>(() => fileSystemVisitor.GetAllFiles(WrongPath));
         }
 
         [Test]

@@ -15,9 +15,10 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFiles(string path)
         {
-            if(!CheckPathExists(path))
+            var message = messages.ExceptionMessage;
+            if (!CheckPathExists(path))
             {
-                throw new FileSystemVisitorException(string.Format("Path \"{0}\" does not exist", path));
+                throw new FileSystemVisitorException(string.Concat(message, path));
             }
             OnWorkStart();
             var di = new DirectoryInfo(path);
@@ -26,9 +27,10 @@ namespace MethodsModuleTask
             return result;
         }
 
-        public IEnumerable<string> GetAllFiles(string path, Func<string, bool> filter = null)
+        public IEnumerable<string> GetAllFiles(string path, Func<string, bool> filter)
         {
-            foreach(var file in GetAllFiles(path))
+            var files = GetAllFiles(path).ToList();
+            foreach (var file in files)
             {
                 if(filter(file))
                 {
@@ -39,9 +41,10 @@ namespace MethodsModuleTask
 
         public IEnumerable<string> GetAllFolders(string path)
         {
+            var message = messages.ExceptionMessage;
             if (!CheckPathExists(path))
             {
-                throw new FileSystemVisitorException(string.Format("Path \"{0}\" does not exist", path));
+                throw new FileSystemVisitorException(string.Concat(message, path));
             }
             OnWorkStart();
             var di = new DirectoryInfo(path);
@@ -50,9 +53,10 @@ namespace MethodsModuleTask
             return result;
         }
 
-        public IEnumerable<string> GetAllFolders(string path, Func<string, bool> filter = null)
+        public IEnumerable<string> GetAllFolders(string path, Func<string, bool> filter)
         {
-            foreach (var folder in GetAllFolders(path))
+            var folders = GetAllFolders(path).ToList();
+            foreach (var folder in folders)
             {
                 if (filter(folder))
                 {

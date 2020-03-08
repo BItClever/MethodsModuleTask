@@ -3,6 +3,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 using System.Threading;
+using messages = Resources.Messages;
 
 namespace MethodsModuleTask
 {
@@ -32,7 +33,7 @@ namespace MethodsModuleTask
             catch(FileSystemVisitorException e)
             {
                 Console.WriteLine(e.Message);
-                Console.WriteLine("Check your config file");
+                Console.WriteLine(messages.CheckConfig);
             }
             catch(Exception e)
             {
