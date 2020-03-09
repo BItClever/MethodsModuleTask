@@ -1,27 +1,26 @@
 ﻿using MethodsModuleTask.Interfaces;
-using Unity;
+using IoC;
 
 namespace MethodsModuleTask
 {
     public class ServiceLocator
     {
-        private readonly IUnityContainer _unityContainer;
+        private readonly IContainer _customContainer;
         public ServiceLocator()
         {
-            _unityContainer = new UnityContainer();
+            _customContainer = new Container();
             RegisterDepandencies();
         }
 
         private void RegisterDepandencies()
         {
-            _unityContainer.RegisterType<IFileSystemVisitor, FileSystemVisitor>();
-            _unityContainer.RegisterType<Application>();
-
+            _customContainer.Register<IFileSystemVisitor, FileSystemVisitor>();
+            _customContainer.Register<Application>();
         }
 
         public T Resolve<T>()
         {
-            return _unityContainer.Resolve<T>();
+            return _customContainer.Resolve<T>();
         }
     }
 }
